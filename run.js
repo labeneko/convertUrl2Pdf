@@ -42,7 +42,9 @@ const { exit } = require('process');
   fs.mkdirSync(dirpath, { recursive: true });
   for (let i = 0; i < urls.length; i++) {
     const url = urls[i];
-    await page.goto(url);
+    await page.goto(url, {
+      waitUntil: "networkidle0"
+    });
     const width = await page.evaluate(() => document.documentElement.offsetWidth);
     const height = await page.evaluate(() => document.documentElement.offsetHeight);
     // PDF作成処理
@@ -51,7 +53,7 @@ const { exit } = require('process');
         printBackground: true,
         margin: { top: '37px', right: '37px', bottom: '37px', left: '37px' },
         width: 793,
-        height: height + 200,
+        height: height + 500,
     });
     process.stdout.write(`\r[${i+1}/${urls.length}] PDF変換中…`)
   };
