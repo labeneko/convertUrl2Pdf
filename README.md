@@ -17,3 +17,5 @@ $ npm install
 
 $ node run.js http://localhost:2525
 ```
+
+- outディレクトリの下にpdf一覧が格納されます
