@@ -45,6 +45,7 @@ const { exit } = require('process');
     await page.goto(url, {
       waitUntil: "networkidle0"
     });
+    await page.addStyleTag({content: ' kbd{background: white; box-shadow: none; border-radius: 0px; border: 1px solid #999;} @page{size:auto !important}'})
     const width = await page.evaluate(() => document.documentElement.offsetWidth);
     const height = await page.evaluate(() => document.documentElement.offsetHeight);
     // PDF作成処理
@@ -53,7 +54,7 @@ const { exit } = require('process');
         printBackground: true,
         margin: { top: '37px', right: '37px', bottom: '37px', left: '37px' },
         width: 793,
-        height: height + 500,
+        height: height + 700,
     });
     process.stdout.write(`\r[${i+1}/${urls.length}] PDF変換中…`)
   };
