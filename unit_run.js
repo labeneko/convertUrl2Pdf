@@ -15,7 +15,7 @@ const { exit } = require('process');
     '--window-size=800,450'
   ];
   const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
         args: args,
         defaultViewport: {
             width: 800,
@@ -35,8 +35,8 @@ const { exit } = require('process');
     waitUntil: "networkidle0"
   });
   await page.addStyleTag({content: ' kbd{background: white; box-shadow: none; border-radius: 0px; border: 1px solid #999;} @page{size:auto !important}'})
-  const width = await page.evaluate(() => document.documentElement.offsetWidth);
-  const height = await page.evaluate(() => document.documentElement.offsetHeight);
+  const width = await page.evaluate(() => document.documentElement.scrollWidth);
+  let height = await page.evaluate(() => document.documentElement.scrollHeight);
   // PDF作成処理
   await page.pdf({
       path: dirpath + '/' + basename(url).split('.')[0] + '.pdf',
