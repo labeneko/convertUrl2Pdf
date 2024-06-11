@@ -34,16 +34,16 @@ const { exit } = require('process');
   await page.goto(url, {
     waitUntil: "networkidle0"
   });
-  await page.addStyleTag({content: ' kbd{background: white; box-shadow: none; border-radius: 0px; border: 1px solid #999;} @page{size:auto !important}'})
+  await page.addStyleTag({content: ' kbd:has(img) {background: white; box-shadow: none; border-radius: 0px; border: 1px solid #999;} @page{size:auto !important}'})
   const width = await page.evaluate(() => document.documentElement.scrollWidth);
-  let height = await page.evaluate(() => document.documentElement.scrollHeight);
+  let height = await page.evaluate(() => document.body.scrollHeight);
   // PDF作成処理
   await page.pdf({
       path: dirpath + '/' + basename(url).split('.')[0] + '.pdf',
       printBackground: true,
       margin: { top: '37px', right: '37px', bottom: '37px', left: '37px' },
       width: 793,
-      height: height + 700,
+      height: height + 2000,
   });
   process.stdout.write(`\rPDF変換中…`)
   process.stdout.write("\n");
