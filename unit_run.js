@@ -15,7 +15,7 @@ const { exit } = require('process');
     '--window-size=800,450'
   ];
   const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: args,
         defaultViewport: {
             width: 800,
