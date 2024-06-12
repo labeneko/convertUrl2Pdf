@@ -34,9 +34,14 @@ const { exit } = require('process');
   await page.goto(url, {
     waitUntil: "networkidle0"
   });
+  await page.waitForFunction(() => {
+    console.log(window.location.href)
+    return window.document.readyState === 'interactive' || window.document.readyState === 'complete'
+  })
   await page.addStyleTag({content: ' kbd:has(img) {background: white; box-shadow: none; border-radius: 0px; border: 1px solid #999;} @page{size:auto !important}'})
-  const width = await page.evaluate(() => document.documentElement.scrollWidth);
+  const width = await page.evaluate(() => document.body.scrollWidth);
   let height = await page.evaluate(() => document.body.scrollHeight);
+  console.log(height);
   // PDF作成処理
   await page.pdf({
       path: dirpath + '/' + basename(url).split('.')[0] + '.pdf',
