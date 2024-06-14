@@ -49,6 +49,7 @@ const { exit } = require('process');
       margin: { top: '37px', right: '37px', bottom: '37px', left: '37px' },
       width: 793,
       height: height + 2000,
+      printBackground: true,
   });
   process.stdout.write(`\rPDF変換中…`)
   process.stdout.write("\n");
